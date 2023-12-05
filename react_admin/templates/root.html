@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            Instagram
+            <hr/>
+            <a href="{% url "instagram:post_new"%}" class="btn btn-primary"> New posting </a>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
