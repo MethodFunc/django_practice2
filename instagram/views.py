@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 
@@ -35,3 +36,17 @@ def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
     return render(request, 'instagram/post_detail.html',
                   {'post': post})
+
+
+def user_page(request, username):
+    page_user = get_object_or_404(get_user_model(), username=username, is_active=True)
+    post_list = Post.objects.filter(author=page_user)
+    post_list_count = post_list.count()
+
+
+    return render(request, 'instagram/user_page.html',{
+        "page_user": page_user,
+        "post_list": post_list,
+        "post_list_count": post_list_count
+    })
+    pass

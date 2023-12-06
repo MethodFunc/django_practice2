@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'bootstrap5',
     'django_pydenticon',
+    'easy_thumbnails',
 
     # my app
     'accounts',
@@ -165,3 +166,12 @@ EMAIL_HOST_USER = "dlthffpt@gmail.com"
 EMAIL_HOST_PASSWORD = "bdmt xxrk dtsc wfrv"
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+
+# Thumbnail Setting
+
+THUMBNAIL_ALIASES = {
+    '': {
+        'avatar': {'size': (50, 50), 'crop': True},
+    },
+}

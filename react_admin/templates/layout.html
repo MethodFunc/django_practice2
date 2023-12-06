@@ -44,7 +44,7 @@
                     <img src="{{ user.profile.url }}" style="width: 24px; height: 24px;"/>
 
                   {% else %}
-                    <img src=" {% url "pydenticon_image" user.username %}" style="width: 24px; height: 24px;"/>
+                    <img src=" {% url "pydenticon_image" user.username %}" class="rounded-circle" style="width: 24px; height: 24px;"/>
                   {% endif%}
 
                 </a>
