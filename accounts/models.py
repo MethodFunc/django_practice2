@@ -15,7 +15,10 @@ class User(AbstractUser):
     class GenderChoices(models.TextChoices):
         MALE = "male", "Male"
         FEMALE = "female", "Female"
-        OTHER= "O", "something that's not a man or a woman"
+        OTHER = "O", "something that's not a man or a woman"
+
+    follower_set = models.ManyToManyField("self", blank=True)
+    following_set = models.ManyToManyField("self", blank=True)
 
     website_url = models.URLField(blank=True)
     bio = models.TextField(blank=True)
@@ -53,4 +56,3 @@ class User(AbstractUser):
         # ... email logic
 
         return self.username
-

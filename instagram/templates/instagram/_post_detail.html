@@ -1,0 +1,40 @@
+{% load instagram_tags %}
+
+<div class="card">
+    <div class="card-header">
+        <img src="{{ post.author.avatar }}" style="width: 32px; height: 32px;">
+        <a href="{% url "instagram:user_page" post.author.username %}">
+            {{ post.author.name }}</a>
+
+    </div>
+    <div class="card-body">
+        {% if post.photo %}
+            <img src="{{ post.photo.url }}" style="width: 100%">
+        {% else %}
+            None
+        {% endif %}
+
+        {% for tag in post.tag_set.all %}
+            <span class="badge bg-primary">
+                             #{{ tag.name }}
+                            </span>
+        {% endfor %}
+
+    </div>
+    <div class="card-footer">
+        {% if post|is_like_user:user %}
+            <a href="{% url "instagram:post_unlike" post.pk %}" style="color: red;">
+                <i class="bi bi-heart-fill"></i>
+            </a>
+        {% else %}
+
+            <a href="{% url "instagram:post_like" post.pk %}" style="color: red;">
+                <i class="bi bi-heart"></i>
+            </a>
+
+        {% endif %}
+
+
+    </div>
+
+</div>

@@ -10,6 +10,14 @@
         <div class="col-sm-9">
             {{ page_user.name }}
             <a href="{% url "profile_edit"%}" class="btn btn-secondary btn-sm"> Edit Profile </a>
+
+            {% if is_follow %}
+                <a href="{% url "user_unfollow" page_user.username %}" class="btn btn-warning btn-sm">Unfollow</a>
+            {% else %}
+                 <a href="{% url "user_follow"  page_user.username  %}" class="btn btn-primary btn-sm">Follow</a>
+
+            {% endif %}
+
             <hr/>
             {{ post_list_count }} Posts, 0 Followers, 0 Following
             <hr/>

@@ -5,29 +5,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <div class="card">
-                    <div class="card-header">
-                        <img src="{{ post.author.avatar }}" style="width: 32px; height: 32px;">
-
-                      {{ post.author.name }}
-
-                    </div>
-                    <div class="card-body">
-                        {% if post.photo %}
-                            <img src="{{ post.photo.url }}" style="width: 100%">
-                        {% else %}
-                            None
-                        {% endif %}
-                    </div>
-                    <div class="card-footer">
-                        {% for tag in post.tag_set.all %}
-                        <span class="badge bg-primary">
-                             #{{ tag.name }}
-                            </span>
-                       {% endfor %}
-                    </div>
-
-                </div>
+                {% include "instagram/_post_detail.html" %}
 
 
 
