@@ -51,6 +51,17 @@ class Post(BaseModel):
         return self.like_user_set.filter(pk=user.pk).exists()
 
 
+class Comment(BaseModel):
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    # 외래키 설정 시 on_delete 옵션을 CASCADE로 설정하면 참조 되는 모든 데이터가 삭제된다.
+    # 참조 되는 데이터가 있다면 오류가 발생한다.
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    message = models.TextField()
+
+    class Meta:
+        ordering = ["-create_dt"]
+
+
 class Tag(models.Model):
     name = models.CharField(max_length=50, unique=True)
 

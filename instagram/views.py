@@ -1,9 +1,10 @@
+import requests
 from django.contrib.auth import get_user_model
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 
-from instagram.forms import PostForm
+from instagram.forms import PostForm, CommentForm
 
 from django.contrib import messages
 from .models import Tag, Post
@@ -22,9 +23,11 @@ def index_view(request):
     suggested_user_list = (get_user_model().objects.all().exclude(pk=request.user.pk)
                            .exclude(pk__in=request.user.following_set.all())[:3])
 
+    comment_form = CommentForm()
     return render(request, 'instagram/index.html', {
         "suggested_user_list": suggested_user_list,
         "post_list": post_list,
+        "comment_form": comment_form
     })
 
 
@@ -52,8 +55,32 @@ def post_new(request):
 
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
+    comment_form = CommentForm()
+
     return render(request, 'instagram/post_detail.html',
-                  {'post': post})
+                  {'post': post,
+                   'comment_form': comment_form})
+
+
+@login_required
+def comment_new(request, post_pk):
+    post = get_object_or_404(Post, pk=post_pk)
+    if request.method == "POST":
+        form = CommentForm(request.POST, request.FILES)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.author = request.user
+            comment.post = post
+
+            comment.save()
+
+            return redirect(comment.post)
+
+    else:
+        form = CommentForm()
+
+    return render(request, "instagram/comment_form.html",
+                  {"form": form})
 
 
 def user_page(request, username):

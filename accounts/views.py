@@ -13,7 +13,20 @@ from django.urls import reverse_lazy
 # def login(request):
 #     pass
 #     # return render(request, 'accounts/login.html')
-login = LoginView.as_view(template_name='accounts/login_form.html')
+login = LoginView.as_view(template_name='accounts/login_form.html', success_url='/')
+
+
+# def login(request):
+#     if request.is_authenticated:
+#         return redirect("instagram:index")
+#
+#     if request.method == "POST":
+#
+#         form = LoginForm(request.POST)
+#         if form.is_valid():
+#             auth_login(request, form.get_user())
+#             next_url = request.GET.get("next", "/")
+#             return redirect(next_url)
 
 
 def logout(request):
