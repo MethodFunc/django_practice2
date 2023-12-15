@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Django Apps
-    'debug_toolbar'
+    'debug_toolbar',
+    'bootstrap5'
 ]
 
 MIDDLEWARE = [
